@@ -1,10 +1,10 @@
-use image::io::Reader as ImageReader;
+use fwp::open;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // load a picture
     // open a jpg
-    let image = ImageReader::open("./assets/colors.jpg")?.decode()?;
-    let image2 = ImageReader::open("./assets/epicPic.jpg")?.decode()?;
+    let image = open::open_img("./assets/colors.jpg")?;
+    let image2 = open::open_img("./assets/epicPic.jpg")?;
     // image aspect ratio is preserved!
     let thumb = image.thumbnail(200, 200);
     let thumb2 = image2.thumbnail(200, 200);
