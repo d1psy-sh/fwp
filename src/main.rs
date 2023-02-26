@@ -1,14 +1,11 @@
-use fwp::open;
+use fwp::{ascii, open, scale};
+use std::io::Write;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // load a picture
-    // open a jpg
     let image = open::open_img("./assets/colors.jpg")?;
-    let image2 = open::open_img("./assets/epicPic.jpg")?;
-    // image aspect ratio is preserved!
-    let thumb = image.thumbnail(200, 200);
-    let thumb2 = image2.thumbnail(200, 200);
-    thumb.save("./assets/thumbColors.jpg")?;
-    thumb2.save("./assets/thumbEpicPic.jpg")?;
+    let thumb1 = scale::scale(100, image);
+    // save ascii to file
+    let f = &mut std::fs::File::create("./assets/colors.txt")?;
+    f.write_all(ascii::to_ascii(thumb1).as_bytes())?;
     Ok(())
 }
