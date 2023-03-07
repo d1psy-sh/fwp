@@ -7,4 +7,6 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.1.8", features = ["derive"] }
+http = "0.2.9"
+httparse = "1.8.0"
 image = "0.24.5"
